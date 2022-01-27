@@ -1,4 +1,5 @@
 import p5 from "p5";
+import { FXInit, FXRandomBool } from "@liamegan1/fxhash-helpers";
 // these are the variables you can use as inputs to your algorithms
 console.log(fxhash); // the 64 chars hex number fed to your algorithm
 console.log(fxrand()); // deterministic PRNG function, use it instead of Math.random()
@@ -7,6 +8,8 @@ console.log(fxrand()); // deterministic PRNG function, use it instead of Math.ra
 // when the "fxhash" is always the same, it will generate the same sequence of
 // pseudo random numbers, always
 
+FXInit(fxrand);
+const boolTest = FXRandomBool();
 //----------------------
 // defining features
 //----------------------
@@ -20,12 +23,16 @@ console.log(fxrand()); // deterministic PRNG function, use it instead of Math.ra
 //   "Number of lines": 10,
 //   "Inverted": true
 // }
-// console.table(window.$fxhashFeatures);
+window.$fxhashFeatures = {
+  boolTest,
+};
+console.table(window.$fxhashFeatures);
 
 let canvasSize;
 
 const sketch = function (p5) {
   p5.setup = function () {
+    p5.noLoop();
     canvasSize = p5.min(p5.windowWidth, p5.windowHeight);
     p5.createCanvas(canvasSize, canvasSize);
   };
@@ -34,7 +41,7 @@ const sketch = function (p5) {
     p5.stroke("black");
     p5.text(`random hash: ${fxhash}`, p5.width * 0.1, p5.height / 2);
     p5.text(
-      `some pseudo random values: [ ${fxrand()}, ${fxrand()}, ${fxrand()}, ${fxrand()}, ${fxrand()},... ]`,
+      `some pseudo random values: [ ${boolTest}, ${FXRandomBool()}]`,
       p5.width * 0.1,
       p5.height / 2 + 30
     );
