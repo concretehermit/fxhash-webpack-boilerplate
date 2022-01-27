@@ -9,13 +9,9 @@
     "build": "webpack --config ./config/webpack.config.prod.js",
     "start": "webpack serve --config ./config/webpack.config.dev.js"
   },
-<<<<<<< HEAD
   "dependencies": {
     "p5": "^1.4.0"
   },
-=======
-  "dependencies": {},
->>>>>>> 9c870d72f53b96e64068682b36c42ce2bd5c2d0a
   "devDependencies": {
     "adm-zip": "^0.5.9",
     "copy-webpack-plugin": "^9.0.1",
